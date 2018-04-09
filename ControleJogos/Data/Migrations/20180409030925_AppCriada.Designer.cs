@@ -11,38 +11,15 @@ using System;
 namespace ControleJogos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180409030925_AppCriada")]
+    partial class AppCriada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ControleJogos.Models.Amigo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnName("Email")
-                        .HasColumnType("Varchar(50)");
-
-                    b.Property<string>("Nome")
-                        .HasColumnName("Nome")
-                        .HasColumnType("Varchar(50)");
-
-                    b.Property<string>("Telefone")
-                        .HasColumnName("Telefone")
-                        .HasColumnType("Varchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Amigo");
-                });
 
             modelBuilder.Entity("ControleJogos.Models.ApplicationUser", b =>
                 {
@@ -93,52 +70,6 @@ namespace ControleJogos.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("ControleJogos.Models.Emprestimo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AmigoId");
-
-                    b.Property<DateTime>("DataEmprestimo");
-
-                    b.Property<int>("JogoId");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnName("Quantidade")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AmigoId");
-
-                    b.HasIndex("JogoId");
-
-                    b.ToTable("Emprestimo");
-                });
-
-            modelBuilder.Entity("ControleJogos.Models.Jogo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .HasColumnName("Nome")
-                        .HasColumnType("Varchar(50)");
-
-                    b.Property<string>("Tipo")
-                        .HasColumnName("Tipo")
-                        .HasColumnType("Varchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Jogo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -247,19 +178,6 @@ namespace ControleJogos.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ControleJogos.Models.Emprestimo", b =>
-                {
-                    b.HasOne("ControleJogos.Models.Amigo", "Amogo")
-                        .WithMany("Emprestimos")
-                        .HasForeignKey("AmigoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ControleJogos.Models.Jogo", "Jogo")
-                        .WithMany("Emprestimos")
-                        .HasForeignKey("JogoId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
